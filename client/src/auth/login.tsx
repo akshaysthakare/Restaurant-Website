@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Loader2, LockKeyhole, Mail } from "lucide-react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const Login = () => {
   const loading = false;
@@ -34,9 +34,7 @@ const Login = () => {
           }
         </div>
         <Separator />
-        <p>Don't have an account?{" "}
-          <Link to="/signup">Signup</Link>
-        </p>
+
       </form>
     </div>
   )
