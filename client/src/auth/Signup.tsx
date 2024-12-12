@@ -1,16 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
+import { SignupInputState, userSignupSchema } from "@/schema/userSchema";
 import { Loader2, LockKeyhole, Mail, Phone, User2 } from "lucide-react";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 
-type SignupInputState = {
-  fullname: string
-  email: string;
-  password: string;
-  contact: string;
-}
+//when makeing validation using the zod we dont need to add the type (refer userSchema)
+// type SignupInputState = {
+//   fullname: string
+//   email: string;
+//   password: string;
+//   contact: string;
+// }
 
 const Signup = () => {
   const [input, setInput] = useState<SignupInputState>({
@@ -20,6 +22,8 @@ const Signup = () => {
     contact: ""
   })
 
+  const [errors, setErrors] = useState<Partial<SignupInputState>>({});
+
   const changeEventHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value })
@@ -27,6 +31,14 @@ const Signup = () => {
 
   const signupSubmitHandler = (e: FormEvent) => {
     e.preventDefault();
+    //form validation check start
+    const result = userSignupSchema.safeParse(input);
+    if (!result.success) {
+      const fieldErrors = result.error.formErrors.fieldErrors;
+      setErrors(fieldErrors as Partial<SignupInputState>);
+      return;
+    }
+    //login api implementation start here
     console.log(input)
   }
 
@@ -42,24 +54,36 @@ const Signup = () => {
           <div className="relative">
             <Input type="fullname" placeholder="fullname" name="fullname" value={input.fullname} onChange={changeEventHandler} className="pl-10 focus-visible:ring-1" />
             <User2 className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
+            {
+              errors && <span className="text-sm text-red-500">{errors.fullname}</span>
+            }
           </div>
         </div>
         <div className="mb-4">
           <div className="relative">
             <Input type="email" placeholder="Email" name="email" value={input.email} onChange={changeEventHandler} className="pl-10 focus-visible:ring-1" />
             <Mail className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
+            {
+              errors && <span className="text-sm text-red-500">{errors.email}</span>
+            }
           </div>
         </div>
         <div className="mb-4">
           <div className="relative">
             <Input type="password" placeholder="Password" name="password" value={input.password} onChange={changeEventHandler} className="pl-10 focus-visible:ring-1" />
             <LockKeyhole className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
+            {
+              errors && <span className="text-sm text-red-500">{errors.password}</span>
+            }
           </div>
         </div>
         <div className="mb-4">
           <div className="relative">
             <Input type="text" placeholder="contact" name="contact" value={input.contact} onChange={changeEventHandler} className="pl-10 focus-visible:ring-1" />
             <Phone className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
+            {
+              errors && <span className="text-sm text-red-500">{errors.contact}</span>
+            }
           </div>
         </div>
         <div className="mb-10">
