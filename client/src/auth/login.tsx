@@ -28,15 +28,19 @@ const Login = () => {
     email: "",
     password: "",
   })
+  
   const changeEventHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value })
   }
+
   const loginSubmitHandler = (e: FormEvent) => {
     e.preventDefault();
     console.log(input)
   }
+
   const loading = false;
+  
   return (
     <div className="flex items-center justify-center min-h-screen w-screen">
       <form onSubmit={loginSubmitHandler} className="md:p-8 w-full max-w-md md:border border-gray-200 rounded-lg mx-4 ">
