@@ -24,3 +24,10 @@ export const userForgotPasswordSchema = z.object({
 })
 
 export type ForgotPasswordInputState = z.infer<typeof userForgotPasswordSchema>
+
+
+export const userResetPasswordSchema = z.object({
+  password: z.string().min(6, "Password must be atlest 6 character"),
+})
+
+// export type ResetPasswordInputState = z.infer<typeof userForgotPasswordSchema>
