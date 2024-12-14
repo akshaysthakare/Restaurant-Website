@@ -12,7 +12,6 @@ const ForgotPassword = () => {
 
   const loading = false;
 
-
   const [errors, setErrors] = useState<Partial<ForgotPasswordInputState>>({})
   const changeEventHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -58,7 +57,6 @@ const ForgotPassword = () => {
             <Button className="bg-orange hover:bg-hoverOrange"> Send Reset Link</Button>
           )
         }
-
         <span className="text-center">
           Back to{" "}
           <Link to="/login" className="text-blue-500">Login</Link>

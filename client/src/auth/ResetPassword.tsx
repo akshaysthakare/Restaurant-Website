@@ -18,7 +18,6 @@ const ResetPassword = () => {
 
   const loading = false;
 
-
   const [errors, setErrors] = useState<Partial<ResetPasswordInputState>>({})
   const changeEventHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

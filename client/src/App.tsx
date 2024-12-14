@@ -39,12 +39,9 @@ const appRouter = createBrowserRouter([
     path: "/verify-email",
     element: <VerifyEmail />
   },
-
-
 ])
 
 function App() {
-
 
   return (
     <>
