@@ -9,7 +9,7 @@ const MainLayout = () => {
       <header><Navbar /></header>
 
       {/* Main Content */}
-      <div className="flex-1">
+      <div className="flex-1 mt-7">
         <Outlet />
       </div>
 
